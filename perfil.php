@@ -64,7 +64,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
     }
     if ($clave != "" && password_verify($clave, $claveU) == 1) {
-        echo "La clave introducida no es correcta";
         include("base.php");
         $sqlC = ("UPDATE usuarios SET rol ='admin' WHERE id_user ='$id'");
         $resultC = $conn->query($sqlC);
@@ -72,7 +71,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $conn->close();
             header("Location: admin.php");
         } else {
-            $alert1 = "CLAVE INCORRECTA";
+            $alert1 = "Clave Incorrecta";
         }
     }else {
         $info = "Uno o todos los campos estan vacios";
@@ -113,7 +112,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <input type="password" id="clave" placeholder="Clave" name="clave" />
                     <button class="btn" type="submit">Cambiar Datos </button>
                 </form>
-                <?php echo $alert1; ?> <?php echo $info; ?>
+                <?php echo $alert1; ?>
+                <?php echo $info; ?>
         </div>
         <div class="forml3">
             <p>Si quiere Cambiar su Clave de usuario<br></p>
