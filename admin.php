@@ -1,5 +1,7 @@
 <?php
 $id_publicacion = 0;
+$inf  = "";
+$alert = "";
 session_start();
 if (!empty($_SESSION["id"])) {
     $id = $_SESSION["id"];
@@ -26,7 +28,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     include("base.php");
     if ($id_user == "") {
-        echo "Debes seleccionar un usuario";
+        $inf = "Debes seleccionar un usuario";
     } else if ($id_user) {
         $stmt = $conn->prepare("DELETE FROM comentarios WHERE id_user = ?");
         $stmt->bind_param("i", $id_user);
@@ -44,7 +46,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $stmt->close();
 
         $conn->close();
-        echo "Usuario eliminado con exito";
+        $alert = "Usuario eliminado con exito";
     } else {
         echo "Error al eliminar usuario";
     }
@@ -107,6 +109,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         <button type="submit" class="btn btn-danger">Eliminar usuario</button">
                     </form>
                 </div>
+             <?php echo $inf; ?>
+            <?php echo $alert; ?>
             </div>
             <div class="content2">
                 <h2>Publicaciones</h3>
