@@ -23,20 +23,31 @@ if (!empty($_SESSION["id"])) {
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = $_POST["email"];
     $clave = $_POST["clave"];
-
+   
     if ($email == $correoU && password_verify($clave, $claveU) == 1) {
+
         include("base.php");
-        $sqlC = ("DELETE FROM usuarios WHERE id_user ='$id'");
-        $resultC = $conn->query($sqlC);
-        if ($resultC) {
-            $conn->close();
-            session_unset();
-            session_destroy();
-            header("Location:login.php");
-            exit();
-        } else {
-            $inf1 = "Error de conexion con el servidor";
-        }
+        $stmt = $conn->prepare('DELETE FROM comentarios WHERE id_user = ?');
+        $stmt->bind_param('i', $id);
+        $stmt->execute();
+        $stmt->close();
+
+        $stmt = $conn->prepare('DELETE FROM publicaciones WHERE id_user = ?');
+        $stmt->bind_param('i', $id);
+        $stmt->execute();
+        $stmt->close();
+
+        $stmt = $conn->prepare('DELETE FROM usuarios WHERE id_user = ?');
+        $stmt->bind_param('i', $id);
+        $stmt->execute();
+        $stmt->close();
+        $conn->close();
+        
+        session_unset();
+        session_destroy();
+        header("Location: login.php");
+
+
     } else {
         $inf2 = "La clave o el correo son invalidas";
     }

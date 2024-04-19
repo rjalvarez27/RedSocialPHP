@@ -65,8 +65,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $mail->setFrom('rjalvarezprueba@gmail.com');
     $mail->addAddress($email);
     $mail->isHTML(true);
-    $mail->Subject = 'Bienvenido!';
-    $mail->Body = "Hola $nombre. Gracias por registrarte";
+    $mail->Subject = 'Bienvenido! Photogram PHP';
+    $mail->Body = "Bienvenido a la aplicacion Photogram PHP $nombre. Gracias por registrarte. Ahora puedes iniciar sesion";
     $mail->send();
 
     $stmt = $conn->prepare("INSERT INTO usuarios (nombre, email, clave) VALUES (?, ?, ?)");
