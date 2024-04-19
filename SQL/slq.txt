@@ -1,0 +1,33 @@
+ CREATE TABLE usuarios (
+    id_user INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(100),
+    email VARCHAR(255) UNIQUE,
+    clave VARCHAR(100),
+    rol VARCHAR(15) DEFAULT 'user',
+    fechaCreacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    fechaActualizacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+    );
+
+ CREATE TABLE publicaciones (
+    id_user INT NOT NULL ,
+    id_publicacion INT NOT NULL AUTO_INCREMENT PRIMARY KEY ,
+    name  VARCHAR(500), 
+    publicacion  VARCHAR(500) ,
+    fechaCreacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    fechaActualizacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (id_user) REFERENCES usuarios(id_user)
+    );
+
+ CREATE TABLE comentarios (
+    id_user INT NOT NULL,
+    id_comentario INT NOT NULL  AUTO_INCREMENT  PRIMARY KEY,
+    id_publicacion INT NOT NULL,
+    comentarios VARCHAR(100),
+    fechaCreacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    fechaActualizacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (id_user) REFERENCES usuarios(id_user),
+    FOREIGN KEY (id_publicacion) REFERENCES publicaciones(id_publicacion)
+    );
+
+
+
