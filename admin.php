@@ -110,7 +110,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </div>
             <div class="content2">
                 <h2>Publicaciones</h3>
-                    <p>En este apartado podra ver todas las publicaiones de los usuarios</p>
+                    <p>En este apartado podra ver todas las publicaciones y los comentarios de los usuarios </p>
                     <div>
                         <?php if ($result1->num_rows > 0) { ?>
                         <?php while ($row = $result->fetch_assoc()) { ?>
@@ -129,7 +129,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                 </div>
                             </div>
                             <?php } ?>
-                        <?php } ?>
+                        <?php } else {
+                            echo "No hay publicaciones ";
+                        } ?>
                     </div>
             </div>
     </main>
