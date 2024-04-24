@@ -1,3 +1,3 @@
-ROYECTO PHP 
+PROYECTO PHP 
 
 La clave de Adminitrador es la misma cLave del correo. 
